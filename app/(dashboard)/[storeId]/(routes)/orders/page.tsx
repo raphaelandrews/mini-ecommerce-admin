@@ -41,9 +41,9 @@ const OrdersPage = async ({
       totalPrice: formatter.format(totalPrice),
       isPaid: item.isPaid,
       createdAt: format(item.createdAt, 'MMMM do, yyyy'),
+      orderItems: item.orderItems
     };
   });
-  
   
 
   return (

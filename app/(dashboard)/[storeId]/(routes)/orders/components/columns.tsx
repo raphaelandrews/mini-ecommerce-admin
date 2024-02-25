@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Badge } from "@/components/ui/badge";
+import { OrderItem, Product } from "@prisma/client";
 
 export type OrderColumn = {
   id: string;
@@ -13,9 +14,28 @@ export type OrderColumn = {
   totalPrice: string;
   products: string;
   createdAt: string;
+  orderItems: { orderItem: OrderItem; product: Product }[];
 }
 
 export const columns: ColumnDef<OrderColumn>[] = [
+  {
+    id: 'expander',
+    header: () => null,
+    cell: ({ row }) => {
+      return row.getCanExpand() ? (
+        <button
+          {...{
+            onClick: row.getToggleExpandedHandler(),
+            style: { cursor: 'pointer' },
+          }}
+        >
+          {row.getIsExpanded() ? '👇' : '👉'}
+        </button>
+      ) : (
+        '🔵'
+      )
+    },
+  },
   {
     accessorKey: "products",
     header: "Products",

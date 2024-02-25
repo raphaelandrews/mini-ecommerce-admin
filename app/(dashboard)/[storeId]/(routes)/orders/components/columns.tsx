@@ -1,9 +1,12 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table";
-
+import { OrderItem, Image, Product as PrismaProduct } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
-import { OrderItem, Product } from "@prisma/client";
+
+interface Product extends PrismaProduct {
+  images: Image[];
+}
 
 export type OrderColumn = {
   id: string;

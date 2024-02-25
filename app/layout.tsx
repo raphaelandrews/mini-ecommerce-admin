@@ -1,12 +1,13 @@
-import { ClerkProvider } from '@clerk/nextjs'
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
 
-import { ModalProvider } from '@/providers/modal-provider'
-import { ToastProvider } from '@/providers/toast-provider'
-import { ThemeProvider } from '@/providers/theme-provider'
+import './globals.css';
+import { cn } from '@/lib/utils';
 
-import './globals.css'
-import { cn } from '@/lib/utils'
+import { ModalProvider } from '@/providers/modal-provider';
+import { ThemeProvider } from '@/providers/theme-provider';
+import { ToastProvider } from '@/providers/toast-provider';
+
 
 const inter = Inter({ subsets: ['latin'] })
 

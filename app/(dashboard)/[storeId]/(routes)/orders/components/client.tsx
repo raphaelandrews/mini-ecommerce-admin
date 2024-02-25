@@ -7,7 +7,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 
 import { columns, OrderColumn } from "./columns";
-import Currency from "@/components/ui/currency";
+import Currency from "@/components/currency";
 
 interface OrderClientProps {
   data: OrderColumn[];

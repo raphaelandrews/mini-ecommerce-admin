@@ -31,7 +31,9 @@ export default async function DashboardLayout({
   return (
     <div className='max-w-[1280px] mx-auto'>
       <Navbar />
-      {children}
+      <main>
+        {children}
+      </main>
     </div>
   );
 };

@@ -21,7 +21,7 @@ const Navbar = async () => {
   });
 
   return (
-    <div className="flex items-center w-11/12 h-16 md:h-20 mx-auto">
+    <header className="flex items-center w-11/12 h-16 md:h-20 mx-auto">
       <StoreSwitcher items={stores} />
       <MainNav className="mx-6" />
       <div className="ml-auto flex items-center space-x-4">
@@ -36,7 +36,7 @@ const Navbar = async () => {
           }}
         />
       </div>
-    </div>
+    </header>
   );
 };
 

@@ -18,10 +18,14 @@ export async function POST(
   req: Request,
   { params }: { params: { storeId: string } }
 ) {
-  const { productIds, quantities } = await req.json();
+  const { productIds, clientId, quantities } = await req.json();
 
   if (!productIds || productIds.length === 0) {
     return new NextResponse("Product ids are required", { status: 400 });
+  }
+
+  if (!clientId || clientId.length === 0) {
+    return new NextResponse("Client id is required", { status: 400 });
   }
 
   if (!quantities || quantities.length !== productIds.length) {
@@ -58,7 +62,8 @@ export async function POST(
       }
     },
     price: product.price.toString(),
-    quantity: quantities[index]
+    quantity: quantities[index],
+    clientId: clientId
   }));
 
 

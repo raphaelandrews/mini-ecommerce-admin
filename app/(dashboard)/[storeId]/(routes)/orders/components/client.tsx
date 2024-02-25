@@ -31,7 +31,6 @@ export const OrderClient: React.FC<OrderClientProps> = ({
               <AvatarFallback>P</AvatarFallback>
             </Avatar>
             <div>
-              <p>{items.orderItem.clientId}</p>
               <p>{items.product.name}</p>
               <p>x {items.orderItem.quantity}</p>
               <Currency value={items.orderItem.price} />

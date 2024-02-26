@@ -31,7 +31,7 @@ export default async function DashboardLayout({
   return (
     <div className='max-w-[1280px] mx-auto'>
       <Navbar />
-      <main>
+      <main className='min-h-screen'>
         {children}
       </main>
     </div>

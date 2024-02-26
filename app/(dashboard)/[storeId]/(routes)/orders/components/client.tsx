@@ -25,7 +25,7 @@ export const OrderClient: React.FC<OrderClientProps> = ({
             className="flex items-center gap-4"
           >
             <Avatar
-              className="w-20 h-20 rounded"
+              className="w-20 h-20"
             >
               <AvatarImage src={items.product.images?.[0]?.url} />
               <AvatarFallback>P</AvatarFallback>

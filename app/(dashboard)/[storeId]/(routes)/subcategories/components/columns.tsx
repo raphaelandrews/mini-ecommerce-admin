@@ -7,7 +7,6 @@ import { CellAction } from "./cell-action"
 export type SubcategoryColumn = {
   id: string
   name: string;
-  value: string;
   createdAt: string;
 }
 

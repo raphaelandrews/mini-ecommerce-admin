@@ -16,10 +16,6 @@ export const columns: ColumnDef<SubcategoryColumn>[] = [
     header: "Name",
   },
   {
-    accessorKey: "value",
-    header: "Value",
-  },
-  {
     accessorKey: "createdAt",
     header: "Date",
   },

@@ -2,12 +2,13 @@
 
 import { Row } from "@tanstack/react-table";
 
+import { columns, OrderColumn } from "./columns";
+
+import Currency from "@/components/currency";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DataTable } from "@/components/ui/data-table";
+import { DataTableExpandable } from "@/components/ui/data-table-expandable";
 import { Heading } from "@/components/ui/heading";
 
-import { columns, OrderColumn } from "./columns";
-import Currency from "@/components/currency";
 
 interface OrderClientProps {
   data: OrderColumn[];
@@ -44,7 +45,7 @@ export const OrderClient: React.FC<OrderClientProps> = ({
   return (
     <>
       <Heading title={`Orders (${data.length})`} description="Manage orders for your store" />
-      <DataTable
+      <DataTableExpandable
         searchKey="products"
         columns={columns}
         data={data}

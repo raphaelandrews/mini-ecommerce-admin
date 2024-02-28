@@ -26,7 +26,7 @@ import { Heading } from "@/components/ui/heading";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FileUpload } from "@/components/file-upload";
+import { FilesUpload } from "@/components/files-upload";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -147,7 +147,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               <FormItem>
                 <FormLabel>Images</FormLabel>
                 <FormControl>
-                  <FileUpload
+                  <FilesUpload
                     endpoint="serverImage"
                     value={field.value.map((image) => image.url)}
                     onChange={(urls) => {

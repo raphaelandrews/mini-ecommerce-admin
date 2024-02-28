@@ -63,14 +63,13 @@ export async function POST(
     },
     price: product.price.toString(),
     quantity: quantities[index],
-    clientId: clientId
   }));
-
 
   const order = await prismadb.order.create({
     data: {
       storeId: params.storeId,
       isPaid: false,
+      clientId: clientId,
       orderItems: {
         create: orderItemsData
       }

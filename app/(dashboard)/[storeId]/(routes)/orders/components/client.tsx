@@ -19,7 +19,7 @@ export const OrderClient: React.FC<OrderClientProps> = ({
 }) => {
   const renderSubComponent = ({ row }: { row: Row<OrderColumn> }) => {
     return (
-      <div className="grid sm:grid-cols-2 gap-4 sm:gap-0 p-4 border-b">
+      <div className="grid sm:grid-cols-2 gap-4 p-4 border-b">
         {row.original.orderItems.map((items) => (
           <div
             key={items.product.id}

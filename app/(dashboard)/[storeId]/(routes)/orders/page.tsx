@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { clerkClient } from "@clerk/nextjs";
 
 import prismadb from "@/lib/prismadb";
 import { formatter } from "@/lib/utils";
@@ -32,13 +33,17 @@ const OrdersPage = async ({
     }
   });
 
-  const formattedOrders: OrderColumn[] = orders.map((item) => {
+  const formattedOrders: OrderColumn[] = await Promise.all(orders.map(async (item) => {
     const totalQuantity = item.orderItems.reduce((total, orderItem) => total + orderItem.quantity, 0);
     const totalPrice = item.orderItems.reduce((total, orderItem) => total + (orderItem.quantity * Number(orderItem.price)), 0);
     const orderItems = item.orderItems.map(orderItem => ({
-      orderItem: orderItem, 
-      product: orderItem.product 
+      orderItem: orderItem,
+      product: orderItem.product
     }));
+
+    const user = await clerkClient.users.getUser(item.clientId);
+    const { firstName, lastName } = user;
+    const fullName = `${firstName} ${lastName}`;
 
     return {
       id: item.id,
@@ -46,14 +51,14 @@ const OrdersPage = async ({
       phone: item.phone,
       address: item.address,
       products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
-      totalQuantity: totalQuantity.toString(), 
+      totalQuantity: totalQuantity.toString(),
       totalPrice: formatter.format(totalPrice),
       isPaid: item.isPaid,
       createdAt: format(item.createdAt, "MM/dd/yyyy"),
+      fullName: fullName,
       orderItems: orderItems
     };
-  });
-  
+  }));
 
   return (
     <div className="flex-col">
@@ -65,3 +70,4 @@ const OrdersPage = async ({
 };
 
 export default OrdersPage;
+

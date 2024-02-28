@@ -19,6 +19,7 @@ export type OrderColumn = {
   totalPrice: string;
   products: string;
   createdAt: string;
+  fullName: string;
   orderItems: { orderItem: OrderItem; product: Product }[];
 }
 
@@ -46,7 +47,7 @@ export const columns: ColumnDef<OrderColumn>[] = [
     header: "User ID",
     cell: ({ row }) => (
       <p key={row.original.clientId}>
-        {row.original.clientId}
+        {row.original.fullName}
       </p>
     )
   },

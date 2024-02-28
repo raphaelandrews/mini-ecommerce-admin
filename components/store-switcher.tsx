@@ -32,10 +32,10 @@ export default function StoreSwitcher({ className, items = [] }: StoreSwitcherPr
   const storeModal = useStoreModal();
   const params = useParams();
   const router = useRouter();
-
+  console.log(items)
   const formattedItems = items.map((item) => ({
-    label: item.name,
-    value: item.id
+    label: item.store.name,
+    value: item.store.id
   }));
 
   const currentStore = formattedItems.find((item) => item.value === params.storeId);

@@ -40,10 +40,10 @@ export async function DELETE(
       return new NextResponse("Country id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
-        userId
+        storeId: params.storeId,
+        userId,
       }
     });
 
@@ -88,10 +88,10 @@ export async function PATCH(
       return new NextResponse("Country id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
-        userId
+        storeId: params.storeId,
+        userId,
       }
     });
 

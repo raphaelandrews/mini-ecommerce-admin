@@ -17,7 +17,7 @@ export async function GET(
         id: params.billboardId
       }
     });
-  
+
     return NextResponse.json(billboard);
   } catch (error) {
     console.log('[BILLBOARD_GET]', error);
@@ -40,9 +40,9 @@ export async function DELETE(
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
+        storeId: params.storeId,
         userId,
       }
     });
@@ -56,7 +56,7 @@ export async function DELETE(
         id: params.billboardId,
       }
     });
-  
+
     return NextResponse.json(billboard);
   } catch (error) {
     console.log('[BILLBOARD_DELETE]', error);
@@ -69,13 +69,13 @@ export async function PATCH(
   req: Request,
   { params }: { params: { billboardId: string, storeId: string } }
 ) {
-  try {   
+  try {
     const { userId } = auth();
 
     const body = await req.json();
-    
+
     const { label, imageUrl } = body;
-    
+
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
@@ -92,9 +92,9 @@ export async function PATCH(
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
+        storeId: params.storeId,
         userId,
       }
     });
@@ -112,7 +112,7 @@ export async function PATCH(
         imageUrl
       }
     });
-  
+
     return NextResponse.json(billboard);
   } catch (error) {
     console.log('[BILLBOARD_PATCH]', error);

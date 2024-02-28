@@ -23,13 +23,19 @@ export async function POST(
     const store = await prismadb.store.create({
       data: {
         name,
-        userId,
       }
     });
-  
-    return NextResponse.json(store);
+
+    const userStore = await prismadb.storeUser.create({
+      data: {
+        storeId: store.id, 
+        userId
+      }
+    });
+
+    return new NextResponse(JSON.stringify(store), { status: 201 });
   } catch (error) {
     console.log('[STORES_POST]', error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}

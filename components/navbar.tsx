@@ -15,9 +15,12 @@ const Navbar = async () => {
     redirect('/sign-in');
   }
 
-  const stores = await prismadb.store.findMany({
+  const stores = await prismadb.storeUser.findMany({
     where: {
-      userId,
+      userId: userId
+    },
+    include: {
+      store: true
     }
   });
 
@@ -29,7 +32,7 @@ const Navbar = async () => {
         <ThemeToggle />
 
         <CommandMenu />
-        
+
         <UserButton
           afterSignOutUrl="/"
           appearance={{

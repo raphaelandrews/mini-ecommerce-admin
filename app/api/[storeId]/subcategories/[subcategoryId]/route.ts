@@ -17,7 +17,7 @@ export async function GET(
         id: params.subcategoryId
       }
     });
-  
+
     return NextResponse.json(subcategory);
   } catch (error) {
     console.log('[SUBCATEGORY_GET]', error);
@@ -40,10 +40,10 @@ export async function DELETE(
       return new NextResponse("Subcategory id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
-        userId
+        storeId: params.storeId,
+        userId,
       }
     });
 
@@ -56,7 +56,7 @@ export async function DELETE(
         id: params.subcategoryId
       }
     });
-  
+
     return NextResponse.json(subcategory);
   } catch (error) {
     console.log('[SUBCATEGORY_DELETE]', error);
@@ -92,10 +92,10 @@ export async function PATCH(
       return new NextResponse("Subcategory id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
-        userId
+        storeId: params.storeId,
+        userId,
       }
     });
 
@@ -111,7 +111,7 @@ export async function PATCH(
         name,
       }
     });
-  
+
     return NextResponse.json(subcategory);
   } catch (error) {
     console.log('[SUBCATEGORY_PATCH]', error);

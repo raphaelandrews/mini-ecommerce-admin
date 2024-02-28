@@ -22,7 +22,7 @@ export async function GET(
         country: true,
       }
     });
-  
+
     return NextResponse.json(product);
   } catch (error) {
     console.log('[PRODUCT_GET]', error);
@@ -45,10 +45,10 @@ export async function DELETE(
       return new NextResponse("Product id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
-        userId
+        storeId: params.storeId,
+        userId,
       }
     });
 
@@ -61,7 +61,7 @@ export async function DELETE(
         id: params.productId
       },
     });
-  
+
     return NextResponse.json(product);
   } catch (error) {
     console.log('[PRODUCT_DELETE]', error);
@@ -93,7 +93,7 @@ export async function PATCH(
       return new NextResponse("Name is required", { status: 400 });
     }
 
-    if (!images || images.length === 0) { 
+    if (!images || images.length === 0) {
       return new NextResponse("At least one image is required", { status: 400 });
     }
 
@@ -109,10 +109,10 @@ export async function PATCH(
       return new NextResponse("Subcategory id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
-        userId
+        storeId: params.storeId,
+        userId,
       }
     });
 

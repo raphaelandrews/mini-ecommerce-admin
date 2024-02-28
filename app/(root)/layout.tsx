@@ -14,14 +14,17 @@ export default async function SetupLayout({
     redirect('/sign-in');
   }
 
-  const store = await prismadb.store.findFirst({
+  const store = await prismadb.storeUser.findFirst({
     where: {
       userId,
+    },
+    include: {
+      store: true
     }
   });
 
   if (store) {
-    redirect(`/${store.id}`);
+    redirect(`/${store.store.id}`);
   };
 
   return (

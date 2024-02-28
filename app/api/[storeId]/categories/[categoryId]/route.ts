@@ -43,9 +43,9 @@ export async function DELETE(
       return new NextResponse("Category id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
+        storeId: params.storeId,
         userId,
       }
     });
@@ -95,9 +95,9 @@ export async function PATCH(
       return new NextResponse("Category id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismadb.storeUser.findFirst({
       where: {
-        id: params.storeId,
+        storeId: params.storeId,
         userId,
       }
     });

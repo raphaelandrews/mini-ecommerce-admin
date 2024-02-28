@@ -93,8 +93,8 @@ export async function PATCH(
       return new NextResponse("Name is required", { status: 400 });
     }
 
-    if (!images || !images.length) {
-      return new NextResponse("Images are required", { status: 400 });
+    if (!images || images.length === 0) { 
+      return new NextResponse("At least one image is required", { status: 400 });
     }
 
     if (!price) {
@@ -131,27 +131,26 @@ export async function PATCH(
         subcategoryId,
         images: {
           deleteMany: {},
+          createMany: {
+            data: images.map((image: { url: string }) => ({ url: image.url })),
+          },
         },
         isFeatured,
         isArchived,
       },
     });
 
-    const product = await prismadb.product.update({
+    const product = await prismadb.product.findUnique({
       where: {
         id: params.productId
       },
-      data: {
-        images: {
-          createMany: {
-            data: [
-              ...images.map((image: { url: string }) => image),
-            ],
-          },
-        },
-      },
-    })
-  
+      include: {
+        images: true,
+        subcategory: true,
+        country: true,
+      }
+    });
+
     return NextResponse.json(product);
   } catch (error) {
     console.log('[PRODUCT_PATCH]', error);

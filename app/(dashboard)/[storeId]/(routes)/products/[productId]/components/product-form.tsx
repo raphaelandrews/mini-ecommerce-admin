@@ -30,7 +30,7 @@ import { FileUpload } from "@/components/file-upload";
 
 const formSchema = z.object({
   name: z.string().min(1),
-  images: z.object({ url: z.string() }).array(),
+  images: z.array(z.object({ url: z.string() })),
   price: z.coerce.number().min(1),
   countryId: z.string().min(1),
   subcategoryId: z.string().min(1),
@@ -118,13 +118,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
   return (
     <>
-    <AlertModal 
-      isOpen={open} 
-      onClose={() => setOpen(false)}
-      onConfirm={onDelete}
-      loading={loading}
-    />
-     <div className="flex items-center justify-between">
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onDelete}
+        loading={loading}
+      />
+      <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -149,8 +149,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 <FormControl>
                   <FileUpload
                     endpoint="serverImage"
-                    value={field.value.length > 0 ? field.value[0].url : ""}
-                    onChange={(url) => field.onChange([{ url }])}
+                    value={field.value.map((image) => image.url)}
+                    onChange={(urls) => {
+                      const images = urls.map((url) => ({ url }));
+                      field.onChange(images);
+                    }}
                   />
                 </FormControl>
                 <FormMessage />

@@ -34,7 +34,7 @@ const OrdersPage = async ({
 
   const formattedOrders: OrderColumn[] = orders.map((item) => {
     const totalQuantity = item.orderItems.reduce((total, orderItem) => total + orderItem.quantity, 0);
-    const totalPrice = item.orderItems.reduce((total, orderItem) => total + (orderItem.quantity * Number(orderItem.product.price)), 0);
+    const totalPrice = item.orderItems.reduce((total, orderItem) => total + (orderItem.quantity * Number(orderItem.price)), 0);
     const orderItems = item.orderItems.map(orderItem => ({
       orderItem: orderItem, 
       product: orderItem.product 
@@ -42,13 +42,14 @@ const OrdersPage = async ({
 
     return {
       id: item.id,
+      clientId: item.clientId,
       phone: item.phone,
       address: item.address,
       products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
       totalQuantity: totalQuantity.toString(), 
       totalPrice: formatter.format(totalPrice),
       isPaid: item.isPaid,
-      createdAt: format(item.createdAt, 'MMMM do, yyyy'),
+      createdAt: format(item.createdAt, "MM/dd/yyyy"),
       orderItems: orderItems
     };
   });

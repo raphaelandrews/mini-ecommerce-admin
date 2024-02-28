@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table";
-import { OrderItem as PrismaOrderItem, Image, Product as PrismaProduct } from "@prisma/client";
+import { OrderItem, Image, Product as PrismaProduct } from "@prisma/client";
 
 import { Badge } from "@/components/ui/badge";
 
@@ -9,12 +9,9 @@ interface Product extends PrismaProduct {
   images: Image[];
 }
 
-interface OrderItem extends PrismaOrderItem {
-  clientId: string;
-}
-
 export type OrderColumn = {
   id: string;
+  clientId: string
   phone: string;
   address: string;
   isPaid: boolean;
@@ -48,13 +45,9 @@ export const columns: ColumnDef<OrderColumn>[] = [
     accessorKey: "orderItem.clientId",
     header: "User ID",
     cell: ({ row }) => (
-      <>
-        {row.original.orderItems.length > 0 && (
-          <p key={row.original.orderItems[0].orderItem.clientId}>
-            {row.original.orderItems[0].orderItem.clientId}
-          </p>
-        )}
-      </>
+      <p key={row.original.clientId}>
+        {row.original.clientId}
+      </p>
     )
   },
   {
@@ -64,6 +57,10 @@ export const columns: ColumnDef<OrderColumn>[] = [
   {
     accessorKey: "address",
     header: "Address",
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Date",
   },
   {
     accessorKey: "totalQuantity",

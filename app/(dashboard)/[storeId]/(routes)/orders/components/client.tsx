@@ -25,9 +25,7 @@ export const OrderClient: React.FC<OrderClientProps> = ({
             key={items.product.id}
             className="flex items-center gap-4"
           >
-            <Avatar
-              className="w-20 h-20"
-            >
+            <Avatar className="w-20 h-20" >
               <AvatarImage src={items.product.images?.[0]?.url} />
               <AvatarFallback>P</AvatarFallback>
             </Avatar>

@@ -17,7 +17,18 @@ export async function GET(
         id: params.categoryId
       },
       include: {
-        billboard: true
+        billboard: true,
+        subcategories: {
+          include: {
+            products: {
+              include: {
+                images: true,
+                country: true,
+                subcategory:true
+              }
+            }
+          }
+        }
       }
     });
   

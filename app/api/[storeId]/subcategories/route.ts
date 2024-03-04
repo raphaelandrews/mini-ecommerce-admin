@@ -68,6 +68,9 @@ export async function GET(
     const subcategories = await prismadb.subcategory.findMany({
       where: {
         storeId: params.storeId
+      },
+      include: {
+        products: true
       }
     });
   

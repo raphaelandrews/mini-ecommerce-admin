@@ -70,7 +70,16 @@ export async function GET(
         storeId: params.storeId
       },
       include: {
-        subcategories: true
+        subcategories: {
+          include: {
+            products: {
+              include: {
+                images: true,
+                country: true
+              }
+            }
+          }
+        }
       }
     });
 

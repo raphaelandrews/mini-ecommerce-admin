@@ -127,7 +127,7 @@ const CommandMenu = () => {
                                 <Link 
                                 href={route.href} 
                                 onClick={handleLinkClick}
-                                className="flex gap-2"
+                                className="flex gap-2 w-full"
                                 >
                                     <ScrollIcon className="mr-2 h-4 w-4" />
                                     {route.label}

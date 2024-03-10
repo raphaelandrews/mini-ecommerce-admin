@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react";
+import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import {
@@ -35,8 +36,6 @@ const CommandMenu = () => {
     React.useEffect(() => {
         setIsMounted(true);
     }, []);
-
-    const router = useRouter();
 
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {
@@ -102,6 +101,10 @@ const CommandMenu = () => {
         return null;
     }
 
+    const handleLinkClick = () => {
+        setOpen(false);
+    };
+
     return (
         <>
             <Button size="icon" onClick={() => setOpen(!open)}>
@@ -116,14 +119,19 @@ const CommandMenu = () => {
                         {routes.map((route) => (
                             <CommandItem
                                 key={route.href}
-                                onClick={() => router.push(route.href)}
                                 className={cn(
                                     'transition-colors hover:text-accent',
                                     route.active ? 'text-primary' : 'text-muted-foreground'
                                 )}
                             >
-                                <ScrollIcon className="mr-2 h-4 w-4" />
-                                {route.label}
+                                <Link 
+                                href={route.href} 
+                                onClick={handleLinkClick}
+                                className="flex gap-2"
+                                >
+                                    <ScrollIcon className="mr-2 h-4 w-4" />
+                                    {route.label}
+                                </Link>
                             </CommandItem>
                         ))}
                     </CommandGroup>

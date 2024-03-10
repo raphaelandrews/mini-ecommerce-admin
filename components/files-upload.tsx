@@ -46,7 +46,7 @@ export const FilesUpload = ({
       <UploadDropzone
         endpoint={endpoint}
         onClientUploadComplete={(res) => {
-          onChange([...value, res?.[0].url]); // Concatenate new URL with existing ones
+          onChange([...value, res?.[0].url]);
         }}
         onUploadError={(error: Error) => {
           console.log(error);

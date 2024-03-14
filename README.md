@@ -13,7 +13,6 @@ pnpm install
 ### You can use .env.example
 
 ```bash
-
 #clerk
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
